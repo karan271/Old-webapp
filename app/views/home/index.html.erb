@@ -1,0 +1,75 @@
+
+
+
+<main>
+	<aside>
+		
+	</aside>
+
+	<% Question.all.each do |ques|%>
+	<li>
+		<div class="ques_content" style="background-color: lightgrey">
+	
+		<%= ques.content%>
+
+		<% ques.answers.each do |ans|%>
+		<ul><li><%= ans.content%></li></ul>
+		<%end%>
+
+		
+
+		<div class="create_answer">
+
+		<%= form_for @question.answers.new do |f| %>
+		<%= hidden_field_tag 'answer[question_id]', @question.id %>
+		 <br>
+		<%= f.text_area :content %> <br>
+
+		<div class = "actions">
+		<%= f.submit id: 'create_answer' %>
+					
+		</div> 	
+			</div>
+		<%end%>
+
+			
+		
+		
+		</div>
+		</li>
+
+
+		<%end%>
+
+
+		
+	<section>
+
+
+
+		<div class="create_question">
+
+		<%= form_for @question do |f| %>
+		<%= f.label :content %> <br>
+		<%= f.text_area :content %> <br>
+
+		<div class = "act">
+		<%= f.submit id: 'create_question' %>
+		<span id="ekcharacter">0</span>			
+		</div> 	
+			
+		<%end%>
+
+			
+		</div>
+
+
+
+
+		
+
+
+
+	</section>
+
+</main>
