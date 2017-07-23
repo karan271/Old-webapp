@@ -6,70 +6,111 @@
 		
 	</aside>
 
+	<section>
+	<div class="create_question">
+
+		<%= form_for @question, remote: true do |f| %>
+		<%= f.label :content %> <br>
+		<%= f.text_area :content %> <br>
+
+		<div class = "actions">
+		<%= f.submit id: 'create_question_submit' %>
+		<span id="characters">0</span>			
+		</div> 	
+			
+		<%end%>
+
+
+		</div>
+
+
 	<% Question.all.each do |ques|%>
 	<li>
 		<div class="ques_content" style="background-color: lightgrey">
-	
+		<h3>Questions</h3>
+		<%= current_user.email %><br>
 		<%= ques.content%>
 
-		<% ques.answers.each do |ans|%>
-		<ul><li><%= ans.content%></li></ul>
+		<% @answers.where(question_id: ques.id).each do |ans|%>
+		<h4>Answers</h4>
+		<% user= User.find_by_id(ans.user_id) %>
+		
+		<%=user.email %>
+		<ul><li><%= ans.content %></li>
+		</ul>
 		<%end%>
 
+
+	<div class="create_ques">
+
+	
+	<div id="quest">
+	<%= render 'question', ques: ques %>
+	
+	</div>
+	</div>
+
+	<% if @question.errors.any? %>
+      
+      <% @question.errors.full_messages.each do |message| %>
+      
+
+      <script type="text/javascript">
+	noty({text: '<%= message %>', type: 'error'});
+	  </script>
+
+
+   
+      
+
+
+      <% end %>
+     
+  <% end %>
 		
 
 		<div class="create_answer">
 
-		<%= form_for @question.answers.new do |f| %>
-		<%= hidden_field_tag 'answer[question_id]', @question.id %>
+		<%= form_for @question.answers.new, remote: true do |f| %>
+		<%= hidden_field_tag 'answer[question_id]', ques.id %>
 		 <br>
 		<%= f.text_area :content %> <br>
 
 		<div class = "actions">
 		<%= f.submit id: 'create_answer' %>
+
+
 					
 		</div> 	
 			</div>
 		<%end%>
 
-			
-		
-		
-		</div>
 		</li>
 
 
-		<%end%>
-
-
-		
-	<section>
-
-
-
-		<div class="create_question">
-
-		<%= form_for @question do |f| %>
-		<%= f.label :content %> <br>
-		<%= f.text_area :content %> <br>
-
-		<div class = "act">
-		<%= f.submit id: 'create_question' %>
-		<span id="ekcharacter">0</span>			
-		</div> 	
-			
-		<%end%>
-
-			
-		</div>
-
-
-
-
-		
+		<%end%>	
 
 
 
 	</section>
 
 </main>
+
+
+<script type="text/javascript">
+	$.ajax({url: '/ajax',
+		data: {
+			text: "text"
+		}
+, success: function(data){
+	console.log(data);
+	console.log("request completed");
+},
+error: function(){
+		console.log(arguments);
+
+	console.log("some error");
+}
+
+});
+</script>

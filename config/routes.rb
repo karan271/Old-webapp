@@ -1,8 +1,18 @@
 Rails.application.routes.draw do
 
-  resources :answers, only: [:create, :destroy]
+  # get 'upvote/toggle_upvote'
+
+  resources :answers, only: [ :create, :destroy]
   resources :questions, only: [:create, :destroy]
   get 'home/index'
+  get '/users' => 'home#users'
+  get '/ajax' => 'home#ajax'
+  post 'upvotes/toggle_upvote'
+   
+  post '/follow' => 'home#follow'
+  post '/unfollow' => 'home#unfollow'
+
+
 
   devise_for :users
    root to: "home#index"

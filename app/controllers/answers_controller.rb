@@ -4,23 +4,23 @@ class AnswersController < ApplicationController
 
   # GET /answers
   # GET /answers.json
-  # def index
-  #   @answers = Answer.all
-  # end
+  def index
+    @answers = Answer.all
+  end
 
-  # # GET /answers/1
-  # # GET /answers/1.json
-  # def show
-  # end
+  # GET /answers/1
+  # GET /answers/1.json
+  def show
+  end
 
-  # # GET /answers/new
-  # def new
-  #   @answer = Answer.new
-  # end
+  # GET /answers/new
+  def new
+    @answer = Answer.new
+  end
 
-  # # GET /answers/1/edit
-  # def edit
-  # end
+  # GET /answers/1/edit
+  def edit
+  end
 
   # POST /answers
   # POST /answers.json

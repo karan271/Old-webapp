@@ -1,0 +1,11 @@
+<div id="quest">
+
+<div class="right">
+		
+		
+ 
+<div class="actions">
+
+	<%= link_to ques.upvote_string(current_user.id), url_for(controller: 'upvotes', action: 'toggle_upvote', question_id: ques.id), method: :post,id: "upvote_#{ques.id}", remote: true %> , <%= ques.upvotes.count %>
+</div>
+</div>
