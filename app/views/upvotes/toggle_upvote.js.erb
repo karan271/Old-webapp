@@ -1,5 +1,7 @@
 <% if @is_upvoted %>
 $('#upvote_<%= @question.id%>').html("Downvote");
+
+$('#count_upvote_<%= @question.id%>').html(<%=ques.upvote.count%>);
 noty({text: 'question was upvoted', type: 'alert'});
 
 <% else %>

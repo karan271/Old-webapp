@@ -28,7 +28,9 @@
 	<li>
 		<div class="ques_content" style="background-color: lightgrey">
 		<h3>Questions</h3>
-		<%= current_user.email %><br>
+		<% link_to "delete" %>
+		<% user= User.find_by_id(ques.user_id) %>
+		<%= user.email %><br>
 		<%= ques.content%>
 
 		<% @answers.where(question_id: ques.id).each do |ans|%>
@@ -44,10 +46,10 @@
 	<div class="create_ques">
 
 	
-	<div id="quest">
+	
 	<%= render 'question', ques: ques %>
 	
-	</div>
+
 	</div>
 
 	<% if @question.errors.any? %>
@@ -58,11 +60,6 @@
       <script type="text/javascript">
 	noty({text: '<%= message %>', type: 'error'});
 	  </script>
-
-
-   
-      
-
 
       <% end %>
      

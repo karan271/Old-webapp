@@ -3,8 +3,7 @@ class UpvotesController < ApplicationController
 
 	def toggle_upvote
 		@question = Question.find(params[:question_id])
-		puts @question
-		
+				
 		upvote = Upvote.where(user: current_user, question: @question).first
 		if upvote
 			upvote.destroy!
@@ -12,6 +11,7 @@ class UpvotesController < ApplicationController
 		else
 			Upvote.create(user: current_user, question: @question)
 			@is_upvoted = true
+			Sendupvote.sample_email(email).deliver_now
 		end
 
 		respond_to do |format|

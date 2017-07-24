@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   post 'upvotes/toggle_upvote'
    
   post '/follow' => 'home#follow'
-  post '/unfollow' => 'home#unfollow'
+  post '/un_follow' => 'home#un_follow'
 
 
 
